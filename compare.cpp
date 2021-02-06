@@ -48,13 +48,14 @@ int main(int argc, char *argv[]){
 
         ifstream test1_in_out("test1.in.out");
         
-        string line1, line2;
+        string line0, line1, line2;
 
         bool all_right = true;
-        for(; getline(test1_in_out, line1) && getline(test1_out, line2);){
+        for(;getline(test1_in, line0) && getline(test1_in_out, line1) && getline(test1_out, line2);){
             if(line1 != line2){
                 all_right = false;
                 cout << "[Wrong answer in test1]" << endl;
+                cout << "      input: " << line0 << endl;
                 cout << "your answer: " << line1 << endl;
                 cout << "real answer: " << line2 << endl;
                 cout << endl;
@@ -89,13 +90,14 @@ int main(int argc, char *argv[]){
 
         ifstream test2_in_out("test2.in.out");
         
-        string line1, line2;
+        string line0, line1, line2;
 
         bool all_right = true;
-        for(; getline(test2_in_out, line1) && getline(test2_out, line2);){
+        for(;getline(test2_in, line0) && getline(test2_in_out, line1) && getline(test2_out, line2);){
             if(line1 != line2){
                 all_right = false;
                 cout << "[Wrong answer in test2]" << endl;
+                cout << "      input: " << line0 << endl;
                 cout << "your answer: " << line1 << endl;
                 cout << "real answer: " << line2 << endl;
                 cout << endl;
