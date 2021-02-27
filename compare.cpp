@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
 
         return 0;
     }
-    string str = "g++ " + (string)argv[idx] + " -o test";
+    string str = "g++ " + (string)argv[idx] + " -o a";
     system(str.c_str());
 
     bool analysis = false;
@@ -41,9 +41,9 @@ int main(int argc, char *argv[]){
     if(test1_in.good() && test1_out.good()){
 
         #ifdef __linux__
-            system("./test < test1.in > test1.in.out");
+            system("./a < test1.in > test1.in.out");
         #elif _WIN32
-            system("test.exe < test1.in >> test1.in.out");
+            system("a.exe < test1.in >> test1.in.out");
         #endif
 
         ifstream test1_in_out("test1.in.out");
@@ -52,17 +52,18 @@ int main(int argc, char *argv[]){
 
         bool all_right = true;
         for(;getline(test1_in, line0) && getline(test1_in_out, line1) && getline(test1_out, line2);){
-            if(line1 != line2){
+            if(line1 != line2)
                 all_right = false;
-                cout << "[Wrong answer in test1]" << endl;
-                cout << "      input: " << line0 << endl;
-                cout << "your answer: " << line1 << endl;
-                cout << "real answer: " << line2 << endl;
-                cout << endl;
-            }
+            // cout << "[Wrong answer in test1]" << endl;
+            // cout << "      input: " << line0 << endl;
+            cout << "your answer: " << line1 << endl;
+            cout << "real answer: " << line2 << endl;
+            cout << endl;
         }
         if(all_right == true)
-            cout << "PASS test1" << endl;
+            cout << "========= PASS test1 =========" << endl << endl;
+        else
+            cout << "========= test1 NOT passed =========" << endl << endl;
 
         test1_in_out.close();
 
@@ -83,9 +84,9 @@ int main(int argc, char *argv[]){
     if(test2_in.good() && test2_out.good()){
 
         #ifdef __linux__
-            system("./test < test2.in > test2.in.out");
+            system("./a < test2.in > test2.in.out");
         #elif _WIN32
-            system("test.exe < test2.in >> test2.in.out");
+            system("a.exe < test2.in >> test2.in.out");
         #endif
 
         ifstream test2_in_out("test2.in.out");
@@ -94,17 +95,18 @@ int main(int argc, char *argv[]){
 
         bool all_right = true;
         for(;getline(test2_in, line0) && getline(test2_in_out, line1) && getline(test2_out, line2);){
-            if(line1 != line2){
+            if(line1 != line2)
                 all_right = false;
-                cout << "[Wrong answer in test2]" << endl;
-                cout << "      input: " << line0 << endl;
-                cout << "your answer: " << line1 << endl;
-                cout << "real answer: " << line2 << endl;
-                cout << endl;
-            }
+            // cout << "[Wrong answer in test2]" << endl;
+            // cout << "      input: " << line0 << endl;
+            cout << "your answer: " << line1 << endl;
+            cout << "real answer: " << line2 << endl;
+            cout << endl;
         }
         if(all_right == true)
-            cout << "PASS test2" << endl;
+            cout << "========= PASS test2 =========" << endl << endl;
+        else
+            cout << "========= test2 NOT passed =========" << endl << endl;
 
         test2_in_out.close();
 
@@ -126,9 +128,9 @@ int main(int argc, char *argv[]){
         getline(cin, remove);
         if(remove == "y" || remove == "Y" || remove == ""){
             #ifdef __linux__
-                system("rm test");
+                system("rm a");
             #elif _WIN32
-                system("del test.exe");
+                system("del a.exe");
             #endif
         }
     }
