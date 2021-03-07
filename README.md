@@ -17,7 +17,7 @@ python crawler.py
 ```
 <br/>
 
-若 `compare.exe` 有更新且要加入到所有考題的資料夾內：
+若 `compare.cpp` 有更新且要加入到所有考題的資料夾內：
 ```
 python upgrade.py
 ```
