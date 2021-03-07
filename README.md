@@ -1,6 +1,6 @@
 # CPE_crawler_and_judgement
 
-!!目前只能用在windows
+!! 目前只能用在windows
 
 安裝第三方模組:
 ```
