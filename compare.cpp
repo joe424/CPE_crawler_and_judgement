@@ -1,6 +1,7 @@
 #include <iostream>
 #include <regex>
 #include <fstream>
+#include <windows.h>
 
 using namespace std;
 
@@ -56,14 +57,54 @@ int main(int argc, char *argv[]){
                 all_right = false;
             // cout << "[Wrong answer in test1]" << endl;
             // cout << "      input: " << line0 << endl;
-            cout << "your answer: " << line1 << endl;
-            cout << "real answer: " << line2 << endl;
-            cout << endl;
+            #ifdef __linux__
+                cout << "your answer: " << line1 << endl;
+                cout << "real answer: " << line2 << endl;
+                cout << endl;
+            #elif _WIN32
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                if(line1 == line2){
+                    cout << "your answer: ";
+                    SetConsoleTextAttribute(hConsole, 10);
+                    cout << line1 << endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                    cout << "real answer: ";
+                    SetConsoleTextAttribute(hConsole, 10);
+                    cout << line2 << endl;
+                    cout << endl;
+                }else{
+                    cout << "your answer: ";
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << line1 << endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                    cout << "real answer: ";
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << line2 << endl;
+                    cout << endl;
+                }
+                SetConsoleTextAttribute(hConsole, 7);
+            #endif
+            
         }
-        if(all_right == true)
-            cout << "========= PASS test1 =========" << endl << endl;
-        else
-            cout << "========= test1 NOT passed =========" << endl << endl;
+        #ifdef __linux__
+            if(all_right == true)
+                cout << "========= PASS test1 =========" << endl << endl;
+            else
+                cout << "========= test1 NOT passed =========" << endl << endl;
+        #elif _WIN32
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            if(all_right == true){
+                SetConsoleTextAttribute(hConsole, 47);
+                cout << "========= PASS test1 =========";
+                SetConsoleTextAttribute(hConsole, 7);
+                cout << endl << endl;
+            }else{
+                SetConsoleTextAttribute(hConsole, 79);
+                cout << "========= test1 NOT passed =========";
+                SetConsoleTextAttribute(hConsole, 7);
+                cout << endl << endl;
+            }
+        #endif
 
         test1_in_out.close();
 
@@ -99,14 +140,53 @@ int main(int argc, char *argv[]){
                 all_right = false;
             // cout << "[Wrong answer in test2]" << endl;
             // cout << "      input: " << line0 << endl;
-            cout << "your answer: " << line1 << endl;
-            cout << "real answer: " << line2 << endl;
-            cout << endl;
+            #ifdef __linux__
+                cout << "your answer: " << line1 << endl;
+                cout << "real answer: " << line2 << endl;
+                cout << endl;
+            #elif _WIN32
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                if(line1 == line2){
+                    cout << "your answer: ";
+                    SetConsoleTextAttribute(hConsole, 10);
+                    cout << line1 << endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                    cout << "real answer: ";
+                    SetConsoleTextAttribute(hConsole, 10);
+                    cout << line2 << endl;
+                    cout << endl;
+                }else{
+                    cout << "your answer: ";
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << line1 << endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                    cout << "real answer: ";
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << line2 << endl;
+                    cout << endl;
+                }
+                SetConsoleTextAttribute(hConsole, 7);
+            #endif
         }
-        if(all_right == true)
-            cout << "========= PASS test2 =========" << endl << endl;
-        else
-            cout << "========= test2 NOT passed =========" << endl << endl;
+        #ifdef __linux__
+            if(all_right == true)
+                cout << "========= PASS test2 =========" << endl << endl;
+            else
+                cout << "========= test2 NOT passed =========" << endl << endl;
+        #elif _WIN32
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            if(all_right == true){
+                SetConsoleTextAttribute(hConsole, 47);
+                cout << "========= PASS test2 =========";
+                SetConsoleTextAttribute(hConsole, 7);
+                cout << endl << endl;
+            }else{
+                SetConsoleTextAttribute(hConsole, 79);
+                cout << "========= test2 NOT passed =========";
+                SetConsoleTextAttribute(hConsole, 7);
+                cout << endl << endl;
+            }
+        #endif
 
         test2_in_out.close();
 
