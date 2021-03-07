@@ -1,8 +1,8 @@
 # CPE_crawler_and_judgement
 
-:::warning
-目前只能用在windows
-:::
+
+(目前只能用在windows)
+<br/>
 
 安裝第三方模組:
 ```
