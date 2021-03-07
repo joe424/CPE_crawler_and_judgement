@@ -1,7 +1,10 @@
 #include <iostream>
 #include <regex>
 #include <fstream>
-#include <windows.h>
+
+#ifdef _WIN32
+#include <winows.h>
+#endif
 
 using namespace std;
 
