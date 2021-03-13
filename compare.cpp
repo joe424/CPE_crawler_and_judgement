@@ -6,6 +6,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
+
     // delete the previous remain execution file if exist
     ifstream f("a.exe");
     if(f.good()){
@@ -59,8 +60,8 @@ int main(int argc, char *argv[]){
         string line1, line2;
         bool all_right = true;
 
-        while((getline(test1_in_out, line1) && getline(test1_out, line2))
-            || getline(test1_in_out, line1) || getline(test1_out, line2)){
+        while(getline(test1_out, line2)){
+            getline(test1_in_out, line1);
             if(line1 != line2)
                 all_right = false;
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -118,8 +119,8 @@ int main(int argc, char *argv[]){
         string line1, line2;
         bool all_right = true;
         
-        while((getline(test2_in_out, line1) && getline(test2_out, line2))
-            || getline(test2_in_out, line1) || getline(test2_out, line2)){
+        while(getline(test2_out, line2)){
+            getline(test2_in_out, line1);
             if(line1 != line2)
                 all_right = false;
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
