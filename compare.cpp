@@ -6,10 +6,18 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
+    // delete the previous remain execution file if exist
+    ifstream f("a.exe");
+    if(f.good()){
+        f.close();
+        system("del a.exe");
+    }
+
+    // to check if it is c/cpp file
     regex reg_cpp(".+\\.cpp");
     regex reg_c(".+\\.c");
-
     int count = 0, idx = -1;
+
     for(int i=0; i<argc; i++){
         if(regex_match(argv[i], reg_c) || regex_match(argv[i], reg_cpp)){
             idx = i;
@@ -23,31 +31,38 @@ int main(int argc, char *argv[]){
             cout << "[Error]: no *.c or *.cpp file" << endl;
 
         system("PAUSE");
-
         return 0;
     }
-    string str = "g++ " + (string)argv[idx] + " -o a";
+
+    // compile and check compilation success or not
+    string str;
+    str = "g++ " + (string)argv[idx] + " -o a -g";
     system(str.c_str());
 
-    bool analysis = false;
+    ifstream exe_file("a.exe");
+    if(!exe_file.good()){
+        cout << "compile failed!" << endl;
+        system("PAUSE");
+        return 0;
+    }else
+        exe_file.close();
 
+    bool analysis = false;
     ifstream test1_in("test1.in");
     ifstream test1_out("test1.out");
-    if(test1_in.good() && test1_out.good()){
 
+    if(test1_in.good() && test1_out.good()){
 
         system("a.exe < test1.in >> test1.in.out");
 
         ifstream test1_in_out("test1.in.out");
-        
-        string line0, line1, line2;
-
+        string line1, line2;
         bool all_right = true;
-        for(;getline(test1_in, line0) && getline(test1_in_out, line1) && getline(test1_out, line2);){
+
+        while((getline(test1_in_out, line1) && getline(test1_out, line2))
+            || getline(test1_in_out, line1) || getline(test1_out, line2)){
             if(line1 != line2)
                 all_right = false;
-            // cout << "[Wrong answer in test1]" << endl;
-            // cout << "      input: " << line0 << endl;
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             if(line1 == line2){
                 cout << "your answer: ";
@@ -56,8 +71,7 @@ int main(int argc, char *argv[]){
                 SetConsoleTextAttribute(hConsole, 7);
                 cout << "real answer: ";
                 SetConsoleTextAttribute(hConsole, 10);
-                cout << line2 << endl;
-                cout << endl;
+                cout << line2 << endl << endl;
             }else{
                 cout << "your answer: ";
                 SetConsoleTextAttribute(hConsole, 12);
@@ -65,11 +79,10 @@ int main(int argc, char *argv[]){
                 SetConsoleTextAttribute(hConsole, 7);
                 cout << "real answer: ";
                 SetConsoleTextAttribute(hConsole, 12);
-                cout << line2 << endl;
-                cout << endl;
+                cout << line2 << endl << endl;
             }
             SetConsoleTextAttribute(hConsole, 7);
-            
+            line1 = line2 = "";
         }
 
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -102,15 +115,13 @@ int main(int argc, char *argv[]){
         system("a.exe < test2.in >> test2.in.out");
 
         ifstream test2_in_out("test2.in.out");
-        
-        string line0, line1, line2;
-
+        string line1, line2;
         bool all_right = true;
-        for(;getline(test2_in, line0) && getline(test2_in_out, line1) && getline(test2_out, line2);){
+        
+        while((getline(test2_in_out, line1) && getline(test2_out, line2))
+            || getline(test2_in_out, line1) || getline(test2_out, line2)){
             if(line1 != line2)
                 all_right = false;
-            // cout << "[Wrong answer in test2]" << endl;
-            // cout << "      input: " << line0 << endl;
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             if(line1 == line2){
                 cout << "your answer: ";
@@ -119,8 +130,7 @@ int main(int argc, char *argv[]){
                 SetConsoleTextAttribute(hConsole, 7);
                 cout << "real answer: ";
                 SetConsoleTextAttribute(hConsole, 10);
-                cout << line2 << endl;
-                cout << endl;
+                cout << line2 << endl << endl;
             }else{
                 cout << "your answer: ";
                 SetConsoleTextAttribute(hConsole, 12);
@@ -128,10 +138,10 @@ int main(int argc, char *argv[]){
                 SetConsoleTextAttribute(hConsole, 7);
                 cout << "real answer: ";
                 SetConsoleTextAttribute(hConsole, 12);
-                cout << line2 << endl;
-                cout << endl;
+                cout << line2 << endl << endl;
             }
             SetConsoleTextAttribute(hConsole, 7);
+            line1 = line2 = "";
         }
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         if(all_right == true){
@@ -155,13 +165,11 @@ int main(int argc, char *argv[]){
     test2_in.close();
     test2_out.close();
 
-
-    string remove;
+    string keep = "";
     if(analysis){
-        cout << "remove execution file?(y/n): ";
-        getline(cin, remove);
-        if(remove == "y" || remove == "Y" || remove == ""){
+        cout << "keep execution file?(y): ";
+        getline(cin, keep);
+        if(keep != "y" && keep != "Y")
             system("del a.exe");
-        }
     }
 }
